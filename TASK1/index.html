@@ -1,5 +1,6 @@
 <!DOCTYPE html> 
 <html>
+    <script src="js.js"></script>
     <head>
         <title>
             Задача 1 А*
@@ -15,14 +16,19 @@
             #bb{
                 position: relative;
             }
+            canvas{
+                border: 1px solid black;
+            }
         </style>
     </head>
     <body id="bb">
         <p>Enter size of n:</p>
         <div>
-            n= <input type="number" id="numb"/><input type="button" value="ok" onclick="createMap()"/>
+            n= <input type="number" id="numb" min="1"/>
+            <input type="button" value="ok" onclick="createMap()"/>
         </div>
-        <script src="js.js"></script>
+        </br>
+        <canvas></canvas>
+        <script src="canvas.js"></script>
     </body>
-
 </html>
