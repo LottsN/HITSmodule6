@@ -1,10 +1,8 @@
-//turning current grid to an array grid
-
-var flag = "null";
 var ar = new Array(100);
 for (var i = 0; i < 100; i++) {
     ar[i] = new Array(100);
 }
+
 var ctx;
 var canvas;
 var n;
@@ -60,13 +58,10 @@ function drawRec(x, y, cellSide, state) {
 }
 
 function addObstacle() {
-    flag = "Obsacle";
-
-    canvas = document.querySelector("canvas");
-    canvas.addEventListener("click", click);
+    canvas.addEventListener("click", clickObstacle);
 }
 
-function click(e) {
+function clickObstacle(e) {
     console.log("mouse has been clicked");
 
     var x = e.clientX - 9;
@@ -79,9 +74,61 @@ function click(e) {
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
-                if (ar[i][j] == 0) {
+                if (ar[i][j] != 1) {
                     ar[i][j] = 1;
                     drawRec(i * cellSide, j * cellSide, cellSide, "black");
+                }
+
+                else {
+                    ar[i][j] = 0;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                }
+                return;
+            }
+        }
+    }
+}
+
+function addStart(){
+    canvas.addEventListener("click", clickStart);
+}
+
+function clickStart(e){
+    var x = e.clientX - 9;
+    var y = e.clientY - canvas.offsetTop - 30;
+
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
+                if (ar[i][j] != 3) {
+                    ar[i][j] = 3;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "green");
+                }
+
+                else {
+                    ar[i][j] = 0;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                }
+                return;
+            }
+        }
+    }
+}
+
+function addEnd(){
+    canvas.addEventListener("click", clickEnd);
+}
+
+function clickEnd(e){
+    var x = e.clientX - 9;
+    var y = e.clientY - canvas.offsetTop - 30;
+
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
+                if (ar[i][j] != 2) {
+                    ar[i][j] = 2;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "blue");
                 }
 
                 else {

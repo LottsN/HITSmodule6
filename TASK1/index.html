@@ -15,13 +15,6 @@
             #bb{
                 position: relative;
             }
-            #button{
-                position:absolute;
-                top: 50%;
-                left: 50%;
-                margin-left: auto;
-                margin-top: -300px;
-            }
         </style>
     </head>
     <body id="bb">
@@ -29,9 +22,9 @@
         <div>
             n= <input type="number" id="numb" min="1"/>
             <input type="button" value="ok" onclick="createMapArray()"/>
-            <div id="button">
-                <input type="button" value="add obstacle" onclick="addObstacle()"/>
-            </div>
+            <input type="button" value="add obstacle" onclick="addObstacle()"/>
+            <input type="button" value="add start point" onclick="addStart()"/>
+            <input type="button" value="add end point" onclick="addEnd()"/>
         </div>
         <script src="js.js"></script>
         </br>
