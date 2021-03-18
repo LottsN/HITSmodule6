@@ -1,13 +1,19 @@
 //turning current grid to an array grid
+
+var flag = "null";
+var ar = new Array(100);
+for (var i = 0; i < 100; i++) {
+    ar[i] = new Array(100);
+}
+var ctx;
+var canvas;
+var n;
+var cellSide;
+
+
 function createMapArray() {
-    var n = document.getElementById("numb").value;
+    n = document.getElementById("numb").value;
     console.log("map creation with array loaded")
-
-    var ar = new Array(n);
-
-    for (var i = 0; i < n; i++) {
-        ar[i] = new Array(n);
-    }
 
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
@@ -15,16 +21,16 @@ function createMapArray() {
         }
     }
 
-    var canvas = document.querySelector("canvas");
+    canvas = document.querySelector("canvas");
 
     canvas.width = window.innerWidth / 2.5;
     canvas.height = window.innerWidth / 2.5;
 
-    var cellSide = Math.round(canvas.width / n);
+    cellSide = Math.round(canvas.width / n);
     canvas.width = Math.round(canvas.width / n) * n;
     canvas.height = Math.round(canvas.height / n) * n;
 
-    var ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
 
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
@@ -38,6 +44,52 @@ function createMapArray() {
             ctx.rect(x, y, cellSide, cellSide);
             ctx.fill();
             ctx.stroke();
+        }
+    }
+}
+
+function drawRec(x, y, cellSide, state) {
+
+    ctx.fillStyle = state;
+    ctx.strokeStyle = "black";
+
+    ctx.beginPath();
+    ctx.rect(x, y, cellSide, cellSide);
+    ctx.fill();
+    ctx.stroke();
+}
+
+function addObstacle() {
+    flag = "Obsacle";
+
+    canvas = document.querySelector("canvas");
+    canvas.addEventListener("click", click);
+}
+
+function click(e) {
+    console.log("mouse has been clicked");
+
+    var x = e.clientX - 9;
+    var y = e.clientY - canvas.offsetTop - 30;
+
+    console.log(x);
+    console.log(y);
+    console.log(cellSide);
+
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
+                if (ar[i][j] == 0) {
+                    ar[i][j] = 1;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "black");
+                }
+
+                else {
+                    ar[i][j] = 0;
+                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                }
+                return;
+            }
         }
     }
 }

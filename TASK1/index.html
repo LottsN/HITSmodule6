@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
 <html>
-    <script src="js.js"></script>
     <head>
         <title>
             Задача 1 А*
@@ -16,12 +15,12 @@
             #bb{
                 position: relative;
             }
-        </style>
-        <style scoped>
-            canvas{
-                position: relative !important;
-                border: black 1px solid;
-                border-radius: 5px;
+            #button{
+                position:absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: auto;
+                margin-top: -300px;
             }
         </style>
     </head>
@@ -30,7 +29,11 @@
         <div>
             n= <input type="number" id="numb" min="1"/>
             <input type="button" value="ok" onclick="createMapArray()"/>
+            <div id="button">
+                <input type="button" value="add obstacle" onclick="addObstacle()"/>
+            </div>
         </div>
+        <script src="js.js"></script>
         </br>
         <canvas></canvas>
     </body>
