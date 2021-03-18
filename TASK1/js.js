@@ -1,33 +1,43 @@
-function createMap() {
+//turning current grid to an array grid
+function createMapArray() {
     var n = document.getElementById("numb").value;
-    console.log("map creation loaded")
-    console.log(n);
+    console.log("map creation with array loaded")
+
+    var ar = new Array(n);
+
+    for (var i = 0; i < n; i++) {
+        ar[i] = new Array(n);
+    }
+
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            ar[i][j] = 0;
+        }
+    }
 
     var canvas = document.querySelector("canvas");
 
     canvas.width = window.innerWidth / 2.5;
     canvas.height = window.innerWidth / 2.5;
 
-    console.log(canvas.height);
-    console.log(canvas.width);
+    var cellSide = Math.round(canvas.width / n);
+    canvas.width = Math.round(canvas.width / n) * n;
+    canvas.height = Math.round(canvas.height / n) * n;
 
     var ctx = canvas.getContext("2d");
 
-    var s = canvas.width / n;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
 
-    ctx.beginPath();
-    for (var i = 0; i <= canvas.width; i += s) {
-        //vertical lines
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i, canvas.width);
+            let x = j * cellSide;
+            let y = i * cellSide;
+
+            ctx.beginPath();
+            ctx.fillStyle = "white";
+            ctx.strokeStyle = "black";
+            ctx.rect(x, y, cellSide, cellSide);
+            ctx.fill();
+            ctx.stroke();
+        }
     }
-
-    for (var i = 0; i <= canvas.width; i += s) {
-        //horizontal lines
-        ctx.moveTo(0, i);
-        ctx.lineTo(canvas.width, i);
-    }
-
-    ctx.strokeStyle = "black";
-    ctx.stroke();
 }
