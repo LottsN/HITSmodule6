@@ -7,6 +7,8 @@ var ctx;
 var canvas;
 var n;
 var cellSide;
+var hasStart = false;
+var hasEnd = false;
 
 
 function createMapArray() {
@@ -58,6 +60,8 @@ function drawRec(x, y, cellSide, state) {
 }
 
 function addObstacle() {
+    canvas.removeEventListener("click", clickStart);
+    canvas.removeEventListener("click", clickEnd);
     canvas.addEventListener("click", clickObstacle);
 }
 
@@ -90,6 +94,8 @@ function clickObstacle(e) {
 }
 
 function addStart(){
+    canvas.removeEventListener("click", clickObstacle);
+    canvas.removeEventListener("click", clickEnd);
     canvas.addEventListener("click", clickStart);
 }
 
@@ -100,8 +106,9 @@ function clickStart(e){
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
-                if (ar[i][j] != 3) {
+                if (!hasStart) {
                     ar[i][j] = 3;
+                    hasStart = true;
                     drawRec(i * cellSide, j * cellSide, cellSide, "green");
                 }
 
@@ -116,6 +123,8 @@ function clickStart(e){
 }
 
 function addEnd(){
+    canvas.removeEventListener("click", clickObstacle);
+    canvas.removeEventListener("click", clickStart);
     canvas.addEventListener("click", clickEnd);
 }
 
@@ -126,8 +135,9 @@ function clickEnd(e){
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
-                if (ar[i][j] != 2) {
+                if (!hasEnd) {
                     ar[i][j] = 2;
+                    hasEnd = true;
                     drawRec(i * cellSide, j * cellSide, cellSide, "blue");
                 }
 
