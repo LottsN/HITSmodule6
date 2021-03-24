@@ -13,6 +13,8 @@ var startx = -1;
 var starty = -1;
 var endx = -1;
 var endy = -1;
+var painting = false;
+var attribute;
 
 //creates gridded canvas
 function createMapArray() {
@@ -27,7 +29,12 @@ function createMapArray() {
 
     canvas = document.querySelector("canvas");
 
-    cellSide = 100;
+    canvas.width = window.innerWidth - 415;
+    canvas.height = canvas.width;
+
+    console.log(canvas.width);
+    console.log(canvas.width/n);
+    cellSide = Math.round(canvas.width / n);
     canvas.width = cellSide * n;
     canvas.height = cellSide * n;
 
@@ -65,26 +72,67 @@ function drawRec(x, y, cellSide, state) {
 function addObstacle() {
     canvas.removeEventListener("click", clickStart);
     canvas.removeEventListener("click", clickEnd);
-    canvas.addEventListener("click", clickObstacle);
+    canvas.addEventListener("mousedown", startPos);
+    canvas.addEventListener("mouseup", endPos);
+    canvas.addEventListener("mousemove", clickObstacle);
+}
+
+function startPos(e) {
+    painting = true;
+
+    var x = e.pageX - 22;
+    var y = e.pageY - 140;
+
+    console.log("user is at x= ", x, " and y= ", y);
+
+    for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+            if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
+                if(ar[i][j] == 0) {
+                    attribute = "add";
+                    ar[i][j] = 1;
+                    drawRec(i, j, cellSide, "#808080");
+                    return;
+                }
+
+                else {
+                    attribute = "remove";
+                    ar[i][j] = 0;
+                    drawRec(i, j, cellSide, "white");
+                    return;
+                }
+            }
+        }
+    }
+    console.log("painting is true");
+}
+
+function endPos(){
+    painting = false;
+    console.log("painting is false");
 }
 
 //function that adds obstacle/impassable area on canvas
 function clickObstacle(e) {
+
+    if(!painting) return;
+
+    console.log("adding obstacle");
     //returns mouse position of user
-    var x = e.clientX - 9;
-    var y = e.clientY - canvas.offsetTop - 30;
+    var x = e.pageX - 22;
+    var y = e.pageY - 140;
 
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
                 //adding new obstacle
-                if (ar[i][j] != 1) {
+                if (attribute == "add" && ar[i][j] == 0) {
                     ar[i][j] = 1;
-                    drawRec(i, j, cellSide, "black");
+                    drawRec(i, j, cellSide, "#808080");
                 }
 
                 //resetting current obstacle
-                else {
+                else if (attribute == "remove" && ar[i][j] == 1) {
                     ar[i][j] = 0;
                     drawRec(i, j, cellSide, "white");
                 }
@@ -96,7 +144,9 @@ function clickObstacle(e) {
 
 //when you click add start point button
 function addStart() {
-    canvas.removeEventListener("click", clickObstacle);
+    canvas.removeEventListener("mousedown", startPos);
+    canvas.removeEventListener("mouseup", endPos);
+    canvas.removeEventListener("mousemove", clickObstacle);
     canvas.removeEventListener("click", clickEnd);
     canvas.addEventListener("click", clickStart);
 }
@@ -104,8 +154,8 @@ function addStart() {
 //function that adds start position on canvas
 function clickStart(e) {
     //returns mouse position of user
-    var x = e.clientX - 9;
-    var y = e.clientY - canvas.offsetTop - 30;
+    var x = e.pageX - 22;
+    var y = e.pageY - 140;
 
     //searching for correspondant cell that user clicked
     for (var i = 0; i < n; i++) {
@@ -147,7 +197,9 @@ function clickStart(e) {
 
 //when you click add end point button
 function addEnd() {
-    canvas.removeEventListener("click", clickObstacle);
+    canvas.removeEventListener("mousedown", startPos);
+    canvas.removeEventListener("mouseup", endPos);
+    canvas.removeEventListener("mousemove", clickObstacle);
     canvas.removeEventListener("click", clickStart);
     canvas.addEventListener("click", clickEnd);
 }
@@ -155,8 +207,8 @@ function addEnd() {
 //function that adds end position on canvas
 function clickEnd(e) {
     //returns mouse position of user
-    var x = e.clientX - 9;
-    var y = e.clientY - canvas.offsetTop - 30;
+    var x = e.pageX - 22;
+    var y = e.pageY - 140;
 
     //searching for correspondant cell that user clicked
     for (var i = 0; i < n; i++) {
@@ -201,8 +253,6 @@ function start() {
     canvas.removeEventListener("click", clickObstacle);
     canvas.removeEventListener("click", clickStart);
     canvas.removeEventListener("click", clickEnd);
-
-    //window.open("https://www.pornhub.com/video/search?search=child+porn").focus();
 
     var src = {
         x: startx,

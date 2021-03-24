@@ -1,3 +1,4 @@
+//
 function Queue() {
     var a = [], b = 0;
 
@@ -30,14 +31,16 @@ function triple(F, X, Y) {
     this.y = Y;
 }
 
+//struct of cell
 function CellDetails() {
-    this.f;
-    this.g;
-    this.h;
-    this.parent_i;
-    this.parent_j;
+    this.f;                                                     //f = g + h
+    this.g;                                                     //returns cost from source
+    this.h;                                                     //heuristic (manhattan distance)
+    this.parent_i;                                              //x coords of parent cell
+    this.parent_j;                                              //y coords of parent cell
 }
 
+//checks if cell not out of bounds
 function isValid(x, y) {
     if (x >= 0 && x < n && y >= 0 && y < n) {
         return true;
@@ -48,16 +51,7 @@ function isValid(x, y) {
     }
 }
 
-function isUnblocked(grid, x, y) {
-    if (grid[x][y] == 0) {
-        return true;
-    }
-
-    else {
-        return false;
-    }
-}
-
+//checks if cell is destination cell
 function isDestination(x, y, dest) {
     if (x == dest.x && y == dest.y) {
         return true;
@@ -68,32 +62,11 @@ function isDestination(x, y, dest) {
     }
 }
 
+//returns manhattan distance
 function calculateHValue(x, y, dest) {
     var Hvalue = Math.abs(x - dest.x) + Math.abs(y - dest.y);
 
     return Hvalue;
-}
-
-function tracePath(cellDetails, dest) {
-    var x = dest.x;
-    var y = dest.y;
-
-    while (!(cellDetails[x][y].parent_i == x && cellDetails[x][y].parent_j == y)) {
-        var cell = {
-            x: x,
-            y: y
-        }
-        console.log("go to");
-        console.log(cell.x);
-        console.log(cell.y);
-        drawRec(x, y, cellSide, "orange");
-        var temp_x = cellDetails[x][y].parent_i;
-        var temp_y = cellDetails[x][y].parent_j;
-        x = temp_x;
-        y = temp_y;
-    }
-
-    drawRec(x, y, cellSide, "orange");
 }
 
 function aStar(grid, src, dest) {
@@ -152,11 +125,11 @@ function aStar(grid, src, dest) {
         isVisited[i][j] = true;
         drawRec(i, j, cellSide, "#70e67a");
 
-        //////////////////////////////////////////
-        //                                      //
-        //generates all neighboors of cell[i][j]//
-        //                                      //
-        //////////////////////////////////////////
+        /////////////////////////////////////////
+        //                                     //
+        //generate all neighboors of cell[i][j]//
+        //                                     //
+        /////////////////////////////////////////
 
         var gNew, hNew, fNew;
 
@@ -179,14 +152,7 @@ function aStar(grid, src, dest) {
                 hNew = calculateHValue(i - 1, j, dest);
                 fNew = hNew + gNew;
 
-                // If it isn’t on the open list, add it to
-                // the open list. Make the current square
-                // the parent of this square. Record the
-                // f, g, and h costs of the square cell
-                //                OR
-                // If it is on the open list already, check
-                // to see if this path to that square is
-                // better, using 'f' cost as the measure.
+                //checks if the cell isn't in the openList, and if it is, checks if it has best current value
                 if (cellDetails[i - 1][j].f == undefined || cellDetails[i - 1][j].f > fNew) {
                     triplet = new triple(fNew, i - 1, j);
                     openList.enqueue(triplet);
@@ -222,14 +188,7 @@ function aStar(grid, src, dest) {
                 hNew = calculateHValue(i + 1, j, dest);
                 fNew = hNew + gNew;
 
-                // If it isn’t on the open list, add it to
-                // the open list. Make the current square
-                // the parent of this square. Record the
-                // f, g, and h costs of the square cell
-                //                OR
-                // If it is on the open list already, check
-                // to see if this path to that square is
-                // better, using 'f' cost as the measure.
+                //checks if the cell isn't in the openList, and if it is, checks if it has best current value
                 if (cellDetails[i + 1][j].f == undefined || cellDetails[i + 1][j].f > fNew) {
                     triplet = new triple(fNew, i + 1, j);
                     openList.enqueue(triplet);
@@ -265,14 +224,7 @@ function aStar(grid, src, dest) {
                 hNew = calculateHValue(i, j + 1, dest);
                 fNew = hNew + gNew;
 
-                // If it isn’t on the open list, add it to
-                // the open list. Make the current square
-                // the parent of this square. Record the
-                // f, g, and h costs of the square cell
-                //                OR
-                // If it is on the open list already, check
-                // to see if this path to that square is
-                // better, using 'f' cost as the measure.
+                //checks if the cell isn't in the openList, and if it is, checks if it has best current value
                 if (cellDetails[i][j + 1].f == undefined || cellDetails[i][j + 1].f > fNew) {
                     triplet = new triple(fNew, i, j + 1);
                     openList.enqueue(triplet);
@@ -308,14 +260,7 @@ function aStar(grid, src, dest) {
                 hNew = calculateHValue(i, j - 1, dest);
                 fNew = hNew + gNew;
 
-                // If it isn’t on the open list, add it to
-                // the open list. Make the current square
-                // the parent of this square. Record the
-                // f, g, and h costs of the square cell
-                //                OR
-                // If it is on the open list already, check
-                // to see if this path to that square is
-                // better, using 'f' cost as the measure.
+                //checks if the cell isn't in the openList, and if it is, checks if it has best current value
                 if (cellDetails[i][j - 1].f == undefined || cellDetails[i][j - 1].f > fNew) {
                     triplet = new triple(fNew, i, j - 1);
                     openList.enqueue(triplet);
@@ -330,8 +275,6 @@ function aStar(grid, src, dest) {
                 }
             }
         }
-
-
     }
 
     //when no path has been found

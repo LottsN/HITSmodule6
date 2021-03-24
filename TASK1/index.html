@@ -4,11 +4,20 @@
         <title>Задача 1 А*</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body id="bb">
-        <p>Enter size of n:</p>
-        <div>
-            n= <input type="number" id="numb" min="1"/>
-            <input type="button" value="ok" onclick="createMapArray()"/>
+        <div id="instruction_panel" class="panel">
+            <header>
+                <h2 class="header_title">Instructions</h2>
+            </header>
+            Enter size of n=<input type="number" id="numb" min="1" max="100"/> in order to generate a maze of size n.
+            <input type="button" value="Submit / Reset" onclick="createMapArray()"/>
+        </div>
+        <div id="command_panel" class="panel right_panel">
+            <header>
+                <h2 id="astar_header">A* maze solver</h2>
+                <h3>Heuristic</h3>
+            </header>
+        </div>
+        <div id="control_panel" class="panel right_panel">
             <input type="button" value="add obstacle" onclick="addObstacle()"/>
             <input type="button" value="add start point" onclick="addStart()"/>
             <input type="button" value="add end point" onclick="addEnd()"/>
@@ -16,6 +25,7 @@
         </div>
         <script src="js.js"></script>
         <script src="a star.js"></script>
+        <script src="path.js"></script>
         </br>
         <canvas></canvas>
     </body>
