@@ -1,21 +1,8 @@
 <!DOCTYPE html> 
 <html>
     <head>
-        <title>
-            Задача 1 А*
-        </title>
-        <style>
-            body{
-                background-color: white;
-            }
-            p{
-                color:black;
-                font-size: 30px;
-            }
-            #bb{
-                position: relative;
-            }
-        </style>
+        <title>Задача 1 А*</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body id="bb">
         <p>Enter size of n:</p>
@@ -25,8 +12,10 @@
             <input type="button" value="add obstacle" onclick="addObstacle()"/>
             <input type="button" value="add start point" onclick="addStart()"/>
             <input type="button" value="add end point" onclick="addEnd()"/>
+            <input type="button" value="START" onclick="start()"/>
         </div>
         <script src="js.js"></script>
+        <script src="a star.js"></script>
         </br>
         <canvas></canvas>
     </body>

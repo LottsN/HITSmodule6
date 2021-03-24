@@ -27,12 +27,9 @@ function createMapArray() {
 
     canvas = document.querySelector("canvas");
 
-    canvas.width = window.innerWidth / 2.5;
-    canvas.height = window.innerWidth / 2.5;
-
-    cellSide = Math.round(canvas.width / n);
-    canvas.width = Math.round(canvas.width / n) * n;
-    canvas.height = Math.round(canvas.height / n) * n;
+    cellSide = 100;
+    canvas.width = cellSide * n;
+    canvas.height = cellSide * n;
 
     ctx = canvas.getContext("2d");
 
@@ -59,7 +56,7 @@ function drawRec(x, y, cellSide, state) {
     ctx.strokeStyle = "black";
 
     ctx.beginPath();
-    ctx.rect(x, y, cellSide, cellSide);
+    ctx.rect(x * cellSide, y * cellSide, cellSide, cellSide);
     ctx.fill();
     ctx.stroke();
 }
@@ -83,13 +80,13 @@ function clickObstacle(e) {
                 //adding new obstacle
                 if (ar[i][j] != 1) {
                     ar[i][j] = 1;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "black");
+                    drawRec(i, j, cellSide, "black");
                 }
 
                 //resetting current obstacle
                 else {
                     ar[i][j] = 0;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                    drawRec(i, j, cellSide, "white");
                 }
                 return;
             }
@@ -98,14 +95,14 @@ function clickObstacle(e) {
 }
 
 //when you click add start point button
-function addStart(){
+function addStart() {
     canvas.removeEventListener("click", clickObstacle);
     canvas.removeEventListener("click", clickEnd);
     canvas.addEventListener("click", clickStart);
 }
 
 //function that adds start position on canvas
-function clickStart(e){
+function clickStart(e) {
     //returns mouse position of user
     var x = e.clientX - 9;
     var y = e.clientY - canvas.offsetTop - 30;
@@ -116,30 +113,29 @@ function clickStart(e){
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
                 //adding start pos for first time
                 if (!hasStart && (startx != i && starty != j)) {
-                    ar[i][j] = 2;
+                    console.log("added start point");
+                    ar[i][j] = 0;
                     hasStart = true;
                     startx = i;
                     starty = j;
-                    drawRec(startx * cellSide, starty * cellSide, cellSide, "green");
+                    drawRec(startx, starty, cellSide, "green");
                 }
 
-                else if(hasStart && (startx != i || starty != j)) {
+                else if (hasStart && (startx != i || starty != j)) {
                     //removing old start pos
-                    drawRec(startx * cellSide, starty * cellSide, cellSide, "white");
-                    ar[startx][starty] = 0;
+                    drawRec(startx, starty, cellSide, "white");
 
                     //adding new start pos
-                    ar[i][j] = 2;
+                    ar[i][j] = 0;
                     startx = i;
                     starty = j;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "green");
+                    drawRec(i, j, cellSide, "green");
                 }
 
                 //resetting start pos
                 else {
                     hasStart = false;
-                    ar[i][j] = 0;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                    drawRec(i, j, cellSide, "white");
                     startx = -1;
                     starty = -1;
                 }
@@ -150,14 +146,14 @@ function clickStart(e){
 }
 
 //when you click add end point button
-function addEnd(){
+function addEnd() {
     canvas.removeEventListener("click", clickObstacle);
     canvas.removeEventListener("click", clickStart);
     canvas.addEventListener("click", clickEnd);
 }
 
 //function that adds end position on canvas
-function clickEnd(e){
+function clickEnd(e) {
     //returns mouse position of user
     var x = e.clientX - 9;
     var y = e.clientY - canvas.offsetTop - 30;
@@ -168,30 +164,30 @@ function clickEnd(e){
             if (i * cellSide < x && x < i * cellSide + cellSide && j * cellSide < y && y < j * cellSide + cellSide) {
                 //adding end pos for first time
                 if (!hasEnd && (endx != i && endy != j)) {
-                    ar[i][j] = 2;
+                    ar[i][j] = 0;
                     hasEnd = true;
                     endx = i;
                     endy = j;
-                    drawRec(endx * cellSide, endy * cellSide, cellSide, "blue");
+                    drawRec(endx, endy, cellSide, "blue");
                 }
 
-                else if(hasEnd && (endx != i || endy != j)) {
+                else if (hasEnd && (endx != i || endy != j)) {
                     //removing old end pos
-                    drawRec(endx * cellSide, endy * cellSide, cellSide, "white");
+                    drawRec(endx, endy, cellSide, "white");
                     ar[endx][endy] = 0;
 
                     //adding new end pos
-                    ar[i][j] = 2;
+                    ar[i][j] = 0;
                     endx = i;
                     endy = j;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "blue");
+                    drawRec(i, j, cellSide, "blue");
                 }
 
                 //resetting end pos
                 else {
                     hasEnd = false;
                     ar[i][j] = 0;
-                    drawRec(i * cellSide, j * cellSide, cellSide, "white");
+                    drawRec(i, j, cellSide, "white");
                     endx = -1;
                     endy = -1;
                 }
@@ -199,4 +195,26 @@ function clickEnd(e){
             }
         }
     }
+}
+
+function start() {
+    canvas.removeEventListener("click", clickObstacle);
+    canvas.removeEventListener("click", clickStart);
+    canvas.removeEventListener("click", clickEnd);
+
+    //window.open("https://www.pornhub.com/video/search?search=child+porn").focus();
+
+    var src = {
+        x: startx,
+        y: starty
+    }
+
+    var dest = {
+        x: endx,
+        y: endy
+    }
+
+    console.log("X of dest is ", dest.x, " and Y of dest is ", dest.y);
+
+    aStar(ar, src, dest);
 }
