@@ -4,13 +4,6 @@ function tracePath(cellDetails, dest) {
     var y = dest.y;
 
     while (!(cellDetails[x][y].parent_i == x && cellDetails[x][y].parent_j == y)) {
-        var cell = {
-            x: x,
-            y: y
-        }
-        console.log("go to");
-        console.log(cell.x);
-        console.log(cell.y);
         var temp_x = cellDetails[x][y].parent_i;
         var temp_y = cellDetails[x][y].parent_j;
         drawPath(x, y, temp_x, temp_y);
@@ -19,32 +12,44 @@ function tracePath(cellDetails, dest) {
     }
 
     drawPath(x, y);
+
+    const button = document.getElementById("clearPath");
+    button.disabled = false;
 }
 
 function drawPath(x, y, temp_x, temp_y) {
-    ctx.fillStyle = "yellow";
+    setTimeout(function () {
 
-    ctx.beginPath();
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(x * cellSide + cellSide / 2, y * cellSide + cellSide / 2);
 
-    //going down
-    if (y - temp_y < 0) {
-        ctx.rect(x * cellSide + cellSide / 2 - cellSide / 40, y * cellSide + cellSide / 2 - cellSide / 40, cellSide / 20, cellSide);
-    }
+        //going down
+        if (y - temp_y > 0 && x - temp_x == 0) {
+            ctx.lineTo(temp_x * cellSide + cellSide / 2, temp_y * cellSide + cellSide / 2 - ctx.lineWidth / 2);
+        }
 
-    //going up
-    else if(y - temp_y > 0) {
-        ctx.rect(x * cellSide + cellSide / 2 - cellSide / 40, y * cellSide - cellSide / 2 + cellSide / 40, cellSide / 20, cellSide);
-    }
+        //going up
+        else if (y - temp_y < 0 && x - temp_x == 0) {
+            ctx.lineTo(temp_x * cellSide + cellSide / 2, temp_y * cellSide + cellSide / 2 + ctx.lineWidth / 2);
+        }
 
-    //going right
-    else if(x - temp_x < 0) {
-        ctx.rect(x * cellSide + cellSide / 2 - cellSide / 40, y * cellSide + cellSide / 2 - cellSide / 40, cellSide, cellSide / 20);
-    }
+        //going right
+        else if (x - temp_x < 0 && y - temp_y == 0) {
+            ctx.lineTo(temp_x * cellSide + cellSide / 2 + ctx.lineWidth / 2, temp_y * cellSide + cellSide / 2);
+        }
 
-    //going left
-    else if(x - temp_x > 0) {
-        ctx.rect(x * cellSide - cellSide / 2 + cellSide / 40, y * cellSide + cellSide / 2 - cellSide / 40, cellSide, cellSide / 20);
-    }
+        //going left
+        else if (x - temp_x > 0 && y - temp_y == 0) {
+            ctx.lineTo(temp_x * cellSide + cellSide / 2 - ctx.lineWidth / 2, temp_y * cellSide + cellSide / 2);
+        }
 
-    ctx.fill();
+        else {
+            ctx.lineTo(temp_x * cellSide + cellSide / 2, temp_y * cellSide + cellSide / 2);
+        }
+
+        ctx.stroke();
+
+    }, time);
 }
