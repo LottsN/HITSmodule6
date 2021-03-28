@@ -1,4 +1,4 @@
-//
+//Queue function
 function Queue() {
     var a = [], b = 0;
 
@@ -62,9 +62,20 @@ function isDestination(x, y, dest) {
     }
 }
 
-//returns manhattan distance
+//returns heuristic distance
 function calculateHValue(x, y, dest) {
-    var Hvalue = Math.abs(x - dest.x) + Math.abs(y - dest.y);
+
+    var Hvalue;
+
+    //use manhattan distance
+    if (document.getElementById("manhattan").checked) {
+        Hvalue = Math.abs(x - dest.x) + Math.abs(y - dest.y);
+    }
+
+    //else use euclidean distance
+    else {
+        Hvalue = Math.sqrt(Math.pow(x - dest.x, 2) + Math.pow(y - dest.y, 2));
+    }
 
     return Hvalue;
 }
@@ -104,13 +115,13 @@ function aStar(grid, src, dest) {
     cellDetails[i][j].parent_i = i;
     cellDetails[i][j].parent_j = j;
 
-    var openList = new Queue();                             //stores possible neighboors
+    var openList = new Queue();                                 //stores possible neighboors
 
     //adding starting position to queue
     var triplet = new triple(0.0, i, j);
     openList.enqueue(triplet);
 
-    var foundDest = false;                                  //boolean to check if end point has been found
+    var foundDest = false;                                      //boolean to check if end point has been found
 
     //Searching for dest....
     while (!openList.isEmpty()) {
@@ -118,12 +129,16 @@ function aStar(grid, src, dest) {
 
         i = p.x;
         j = p.y;
+        isVisited[i][j] = true;
+
+        if (i != src.x || j != src.y) {
+            drawAnimation(i, j, cellSide, "#98FB98");
+        }
+
         console.log("Visiting:")
         console.log("i = ", i);
         console.log("j = ", j);
         console.log("f = ", p.f, " g =", cellDetails[i][j].g, " h = ", cellDetails[i][j].h);
-        isVisited[i][j] = true;
-        drawRec(i, j, cellSide, "#70e67a");
 
         /////////////////////////////////////////
         //                                     //
@@ -133,7 +148,7 @@ function aStar(grid, src, dest) {
 
         var gNew, hNew, fNew;
 
-        //1st neighboor (up)
+        //1st neighboor (left)
         if (isValid(i - 1, j) == true) {
             //if end cell is same as current neighboor
             if (isDestination(i - 1, j, dest) == true) {
@@ -148,7 +163,7 @@ function aStar(grid, src, dest) {
 
             //if neighboor not already visited and isn't an obstacle
             else if (isVisited[i - 1][j] == false && grid[i - 1][j] != 1) {
-                gNew = cellDetails[i][j].g + 1;
+                gNew = cellDetails[i][j].g + (1 / weight);
                 hNew = calculateHValue(i - 1, j, dest);
                 fNew = hNew + gNew;
 
@@ -156,7 +171,10 @@ function aStar(grid, src, dest) {
                 if (cellDetails[i - 1][j].f == undefined || cellDetails[i - 1][j].f > fNew) {
                     triplet = new triple(fNew, i - 1, j);
                     openList.enqueue(triplet);
-                    console.log("has added (", triplet.x, ",", triplet.y, ") to be searched with f of", triplet.f);
+
+                    if (triplet.x != dest.x || triplet != dest.y) {
+                        drawAnimation(i - 1, j, cellSide, "#00D9FF");
+                    }
 
                     //update details of cell
                     cellDetails[i - 1][j].f = fNew;
@@ -169,7 +187,7 @@ function aStar(grid, src, dest) {
 
         }
 
-        //2nd neighboor (down)
+        //2nd neighboor (right)
         if (isValid(i + 1, j) == true) {
             //if end cell is same as current neighboor
             if (isDestination(i + 1, j, dest) == true) {
@@ -184,7 +202,7 @@ function aStar(grid, src, dest) {
 
             //if neighboor not already visited and isn't an obstacle
             else if (isVisited[i + 1][j] == false && grid[i + 1][j] != 1) {
-                gNew = cellDetails[i][j].g + 1;
+                gNew = cellDetails[i][j].g + (1 / weight);
                 hNew = calculateHValue(i + 1, j, dest);
                 fNew = hNew + gNew;
 
@@ -192,7 +210,10 @@ function aStar(grid, src, dest) {
                 if (cellDetails[i + 1][j].f == undefined || cellDetails[i + 1][j].f > fNew) {
                     triplet = new triple(fNew, i + 1, j);
                     openList.enqueue(triplet);
-                    console.log("has added (", triplet.x, ",", triplet.y, ") to be searched with f of", triplet.f);
+
+                    if (triplet.x != dest.x || triplet != dest.y) {
+                        drawAnimation(i + 1, j, cellSide, "#00D9FF");
+                    }
 
                     //update details of cell
                     cellDetails[i + 1][j].f = fNew;
@@ -205,7 +226,7 @@ function aStar(grid, src, dest) {
 
         }
 
-        //3rd neighboor (right)
+        //3rd neighboor (up)
         if (isValid(i, j + 1) == true) {
             //if end cell is same as current neighboor
             if (isDestination(i, j + 1, dest) == true) {
@@ -220,7 +241,7 @@ function aStar(grid, src, dest) {
 
             //if neighboor not already visited and isn't an obstacle
             else if (isVisited[i][j + 1] == false && grid[i][j + 1] != 1) {
-                gNew = cellDetails[i][j].g + 1;
+                gNew = cellDetails[i][j].g + (1 / weight);
                 hNew = calculateHValue(i, j + 1, dest);
                 fNew = hNew + gNew;
 
@@ -228,7 +249,10 @@ function aStar(grid, src, dest) {
                 if (cellDetails[i][j + 1].f == undefined || cellDetails[i][j + 1].f > fNew) {
                     triplet = new triple(fNew, i, j + 1);
                     openList.enqueue(triplet);
-                    console.log("has added (", triplet.x, ",", triplet.y, ") to be searched with f of", triplet.f);
+
+                    if (triplet.x != dest.x || triplet != dest.y) {
+                        drawAnimation(i, j + 1, cellSide, "#00D9FF");
+                    }
 
                     //update details of cell
                     cellDetails[i][j + 1].f = fNew;
@@ -241,7 +265,7 @@ function aStar(grid, src, dest) {
 
         }
 
-        //4th neighboor (left)
+        //4th neighboor (down)
         if (isValid(i, j - 1) == true) {
             //if end cell is same as current neighboor
             if (isDestination(i, j - 1, dest) == true) {
@@ -256,7 +280,7 @@ function aStar(grid, src, dest) {
 
             //if neighboor not already visited and isn't an obstacle
             else if (isVisited[i][j - 1] == false && grid[i][j - 1] != 1) {
-                gNew = cellDetails[i][j].g + 1;
+                gNew = cellDetails[i][j].g + (1 / weight);
                 hNew = calculateHValue(i, j - 1, dest);
                 fNew = hNew + gNew;
 
@@ -264,7 +288,10 @@ function aStar(grid, src, dest) {
                 if (cellDetails[i][j - 1].f == undefined || cellDetails[i][j - 1].f > fNew) {
                     triplet = new triple(fNew, i, j - 1);
                     openList.enqueue(triplet);
-                    console.log("has added (", triplet.x, ",", triplet.y, ") to be searched with f of", triplet.f);
+
+                    if (triplet.x != dest.x || triplet != dest.y) {
+                        drawAnimation(i, j - 1, cellSide, "#00D9FF");
+                    }
 
                     //update details of cell
                     cellDetails[i][j - 1].f = fNew;
@@ -272,6 +299,164 @@ function aStar(grid, src, dest) {
                     cellDetails[i][j - 1].h = hNew;
                     cellDetails[i][j - 1].parent_i = i;
                     cellDetails[i][j - 1].parent_j = j;
+                }
+            }
+        }
+
+
+        //add diagonal neighboors if option is checked
+        if(document.getElementById("allow_diagonal").checked) {
+            console.log("diagonal is checked");
+
+            //5th neighboor (lower right)
+            if (isValid(i + 1, j + 1) == true) {
+                //if end cell is same as current neighboor
+                if (isDestination(i + 1, j + 1, dest) == true) {
+                    //set parent of destination cell
+                    cellDetails[i + 1][j + 1].parent_i = i;
+                    cellDetails[i + 1][j + 1].parent_j = j;
+                    //MAKE HAPPY NOISES
+                    tracePath(cellDetails, dest);
+                    foundDest = true;
+                    return;
+                }
+    
+                //if neighboor not already visited and isn't an obstacle
+                else if (isVisited[i + 1][j + 1] == false && grid[i + 1][j + 1] != 1) {
+                    gNew = cellDetails[i][j].g + (1.5 / weight);
+                    hNew = calculateHValue(i + 1, j + 1, dest);
+                    fNew = hNew + gNew;
+    
+                    //checks if the cell isn't in the openList, and if it is, checks if it has best current value
+                    if (cellDetails[i + 1][j + 1].f == undefined || cellDetails[i + 1][j + 1].f > fNew) {
+                        triplet = new triple(fNew, i + 1, j + 1);
+                        openList.enqueue(triplet);
+    
+                        if (triplet.x != dest.x || triplet != dest.y) {
+                            drawAnimation(i + 1, j + 1, cellSide, "#00D9FF");
+                        }
+    
+                        //update details of cell
+                        cellDetails[i + 1][j + 1].f = fNew;
+                        cellDetails[i + 1][j + 1].g = gNew;
+                        cellDetails[i + 1][j + 1].h = hNew;
+                        cellDetails[i + 1][j + 1].parent_i = i;
+                        cellDetails[i + 1][j + 1].parent_j = j;
+                    }
+                }
+            }
+
+            //6th neighboor (lower left)
+            if (isValid(i - 1, j + 1) == true) {
+                //if end cell is same as current neighboor
+                if (isDestination(i - 1, j + 1, dest) == true) {
+                    //set parent of destination cell
+                    cellDetails[i - 1][j + 1].parent_i = i;
+                    cellDetails[i - 1][j + 1].parent_j = j;
+                    //MAKE HAPPY NOISES
+                    tracePath(cellDetails, dest);
+                    foundDest = true;
+                    return;
+                }
+    
+                //if neighboor not already visited and isn't an obstacle
+                else if (isVisited[i - 1][j + 1] == false && grid[i - 1][j + 1] != 1) {
+                    gNew = cellDetails[i][j].g + (1.5 / weight);
+                    hNew = calculateHValue(i - 1, j + 1, dest);
+                    fNew = hNew + gNew;
+    
+                    //checks if the cell isn't in the openList, and if it is, checks if it has best current value
+                    if (cellDetails[i - 1][j + 1].f == undefined || cellDetails[i - 1][j + 1].f > fNew) {
+                        triplet = new triple(fNew, i - 1, j + 1);
+                        openList.enqueue(triplet);
+    
+                        if (triplet.x != dest.x || triplet != dest.y) {
+                            drawAnimation(i - 1, j + 1, cellSide, "#00D9FF");
+                        }
+    
+                        //update details of cell
+                        cellDetails[i - 1][j + 1].f = fNew;
+                        cellDetails[i - 1][j + 1].g = gNew;
+                        cellDetails[i - 1][j + 1].h = hNew;
+                        cellDetails[i - 1][j + 1].parent_i = i;
+                        cellDetails[i - 1][j + 1].parent_j = j;
+                    }
+                }
+            }
+
+            //7th neighboor (upper left)
+            if (isValid(i - 1, j - 1) == true) {
+                //if end cell is same as current neighboor
+                if (isDestination(i - 1, j - 1, dest) == true) {
+                    //set parent of destination cell
+                    cellDetails[i - 1][j - 1].parent_i = i;
+                    cellDetails[i - 1][j - 1].parent_j = j;
+                    //MAKE HAPPY NOISES
+                    tracePath(cellDetails, dest);
+                    foundDest = true;
+                    return;
+                }
+    
+                //if neighboor not already visited and isn't an obstacle
+                else if (isVisited[i - 1][j - 1] == false && grid[i - 1][j - 1] != 1) {
+                    gNew = cellDetails[i][j].g + (1.5 / weight);
+                    hNew = calculateHValue(i - 1, j - 1, dest);
+                    fNew = hNew + gNew;
+    
+                    //checks if the cell isn't in the openList, and if it is, checks if it has best current value
+                    if (cellDetails[i - 1][j - 1].f == undefined || cellDetails[i - 1][j - 1].f > fNew) {
+                        triplet = new triple(fNew, i - 1, j - 1);
+                        openList.enqueue(triplet);
+    
+                        if (triplet.x != dest.x || triplet != dest.y) {
+                            drawAnimation(i - 1, j - 1, cellSide, "#00D9FF");
+                        }
+    
+                        //update details of cell
+                        cellDetails[i - 1][j - 1].f = fNew;
+                        cellDetails[i - 1][j - 1].g = gNew;
+                        cellDetails[i - 1][j - 1].h = hNew;
+                        cellDetails[i - 1][j - 1].parent_i = i;
+                        cellDetails[i - 1][j - 1].parent_j = j;
+                    }
+                }
+            }
+
+            //8th (upper right)
+            if (isValid(i + 1, j - 1) == true) {
+                //if end cell is same as current neighboor
+                if (isDestination(i + 1, j - 1, dest) == true) {
+                    //set parent of destination cell
+                    cellDetails[i + 1][j - 1].parent_i = i;
+                    cellDetails[i + 1][j - 1].parent_j = j;
+                    //MAKE HAPPY NOISES
+                    tracePath(cellDetails, dest);
+                    foundDest = true;
+                    return;
+                }
+    
+                //if neighboor not already visited and isn't an obstacle
+                else if (isVisited[i + 1][j - 1] == false && grid[i + 1][j - 1] != 1) {
+                    gNew = cellDetails[i][j].g + (1.5 / weight);
+                    hNew = calculateHValue(i + 1, j - 1, dest);
+                    fNew = hNew + gNew;
+    
+                    //checks if the cell isn't in the openList, and if it is, checks if it has best current value
+                    if (cellDetails[i + 1][j - 1].f == undefined || cellDetails[i + 1][j - 1].f > fNew) {
+                        triplet = new triple(fNew, i + 1, j - 1);
+                        openList.enqueue(triplet);
+    
+                        if (triplet.x != dest.x || triplet != dest.y) {
+                            drawAnimation(i + 1, j - 1, cellSide, "#00D9FF");
+                        }
+    
+                        //update details of cell
+                        cellDetails[i + 1][j - 1].f = fNew;
+                        cellDetails[i + 1][j - 1].g = gNew;
+                        cellDetails[i + 1][j - 1].h = hNew;
+                        cellDetails[i + 1][j - 1].parent_i = i;
+                        cellDetails[i + 1][j - 1].parent_j = j;
+                    }
                 }
             }
         }

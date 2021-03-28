@@ -1,10 +1,69 @@
 body{
-    background-color: white;
+    background-color:rgb(0 0 0 / 70%);
+    font-size: normal;
 }
 
 canvas {
+    position: fixed;
     margin-top: 115px;
-    margin-left: 15px;
+    right: 450px;
+}
+
+header {
+    display: block;
+}
+
+h3 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+div{
+    display: block;
+}
+
+input{
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    font-size: 90%;
+    cursor: pointer;
+    padding: 2px 8px;
+    margin: 0 2%;
+    width: 28%;
+    appearance: auto;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    font: 400 15px Arial;
+}
+
+.number {
+    width: 2em;
+}
+
+input[type="radio" i] {
+    background-color: initial;
+    appearance: auto;
+    box-sizing: border-box;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 5px;
+    padding: initial;
+    border: initial;
 }
 
 .panel{
@@ -28,8 +87,28 @@ canvas {
     margin-top: -10px;
 }
 
+.sub_option{
+    padding: 2px;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-right: 30px;
+    margin-left: 30px;
+    line-height: 1.7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.option_header {
+    font-size: 80%;
+    margin-left: 20px;
+}
+
 #command_panel{
     top: 20px;
+}
+
+#MazeGeneration{
+    width: 60%;
+    margin: 0;
 }
 
 #instruction_panel {
@@ -39,7 +118,11 @@ canvas {
 }
 
 #control_panel {
-    top: 560px;
+    top: 515px;
+}
+
+#parameter_panel{
+    top: 430px;
 }
 
 #numb{
@@ -49,11 +132,11 @@ canvas {
 #astar_header{
     position: relative;
     margin-top: -20px;
-    border: solid 10px #333;
-    background: rgba(0,0,0,0.5);
+    border: solid 10px rgba(0, 0, 0);
+    background: rgba(0,0,0);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    font-size: 150%;
+    font-size: 35px;
     font-weight: bold;
     color: #ddd;
     line-height: 1.3;
