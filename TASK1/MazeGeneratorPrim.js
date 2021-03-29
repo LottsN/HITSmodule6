@@ -1,7 +1,8 @@
 //Maze generation algorithm modified from https://cantwell-tom.medium.com/prims-algorithm-as-a-maze-in-javascript-aec7415ad2cd
 function generatePrimMaze() {
     //making maze full of walls
-    console.log("Starting process of maze generation")
+    console.log("Starting process of maze generation");
+    document.getElementById("informational_text").innerHTML = "Generating Maze...";
 
     time = 0;
 
@@ -13,10 +14,16 @@ function generatePrimMaze() {
     hasEnd = false;
     hasStart = false;
 
+    var button = document.getElementById("clearPath");
+    button.disabled = true;
+
+    button = document.getElementById("startSearch");
+    button.disabled = true;
+
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             ar[i][j] = 1;
-            drawRec(i, j, cellSide, "#808080");
+            drawRec(i, j, "#808080");
         }
     }
     console.log("filled maze with walls")
@@ -89,7 +96,7 @@ function generatePrimMaze() {
         current.status = "visited";
         console.log("adding frontier at ", current.x * 2 + 1, " ", current.y * 2 + 1)
         ar[current.x * 2 + 1][current.y * 2 + 1] = 0;
-        drawAnimation(current.x * 2 + 1, current.y * 2 + 1, cellSide, "white");
+        drawAnimation(current.x * 2 + 1, current.y * 2 + 1, "white");
 
         //add adjacent cells to frontier
         function addToFrontier(adjacentCell) {
@@ -123,7 +130,7 @@ function generatePrimMaze() {
             console.log("stupid algorithm at Y= ", frontierCell.connections[randomConnection].y);
 
             ar[connectX + 1][connectY + 1] = 0;
-            drawAnimation(connectX + 1, connectY + 1, cellSide, "white");
+            drawAnimation(connectX + 1, connectY + 1, "white");
         }
         //make the frontier cell the new current
         current = frontierCell;
@@ -131,6 +138,10 @@ function generatePrimMaze() {
             recursiveSpanningTree();
         }
     }
+
+    setTimeout(function() {
+        document.getElementById("informational_text").innerHTML = "Set START and END positions before searching for path.";
+    }, time);
 
     n = (2 * n) + overflow;
 }

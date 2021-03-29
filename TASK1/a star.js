@@ -83,6 +83,7 @@ function calculateHValue(x, y, dest) {
 function aStar(grid, src, dest) {
     console.log("SUCCESSFULLY LOADED aSTAR");
     console.log(n);
+    document.getElementById("informational_text").innerHTML = "Searching for Path...";
 
     //adds isVisited matrix
     var isVisited = new Array(n);
@@ -132,7 +133,7 @@ function aStar(grid, src, dest) {
         isVisited[i][j] = true;
 
         if (i != src.x || j != src.y) {
-            drawAnimation(i, j, cellSide, "#98FB98");
+            drawAnimation(i, j, "#98FB98");
         }
 
         console.log("Visiting:")
@@ -173,7 +174,7 @@ function aStar(grid, src, dest) {
                     openList.enqueue(triplet);
 
                     if (triplet.x != dest.x || triplet != dest.y) {
-                        drawAnimation(i - 1, j, cellSide, "#00D9FF");
+                        drawAnimation(i - 1, j, "#00D9FF");
                     }
 
                     //update details of cell
@@ -212,7 +213,7 @@ function aStar(grid, src, dest) {
                     openList.enqueue(triplet);
 
                     if (triplet.x != dest.x || triplet != dest.y) {
-                        drawAnimation(i + 1, j, cellSide, "#00D9FF");
+                        drawAnimation(i + 1, j, "#00D9FF");
                     }
 
                     //update details of cell
@@ -251,7 +252,7 @@ function aStar(grid, src, dest) {
                     openList.enqueue(triplet);
 
                     if (triplet.x != dest.x || triplet != dest.y) {
-                        drawAnimation(i, j + 1, cellSide, "#00D9FF");
+                        drawAnimation(i, j + 1, "#00D9FF");
                     }
 
                     //update details of cell
@@ -290,7 +291,7 @@ function aStar(grid, src, dest) {
                     openList.enqueue(triplet);
 
                     if (triplet.x != dest.x || triplet != dest.y) {
-                        drawAnimation(i, j - 1, cellSide, "#00D9FF");
+                        drawAnimation(i, j - 1, "#00D9FF");
                     }
 
                     //update details of cell
@@ -333,7 +334,7 @@ function aStar(grid, src, dest) {
                         openList.enqueue(triplet);
     
                         if (triplet.x != dest.x || triplet != dest.y) {
-                            drawAnimation(i + 1, j + 1, cellSide, "#00D9FF");
+                            drawAnimation(i + 1, j + 1, "#00D9FF");
                         }
     
                         //update details of cell
@@ -371,7 +372,7 @@ function aStar(grid, src, dest) {
                         openList.enqueue(triplet);
     
                         if (triplet.x != dest.x || triplet != dest.y) {
-                            drawAnimation(i - 1, j + 1, cellSide, "#00D9FF");
+                            drawAnimation(i - 1, j + 1, "#00D9FF");
                         }
     
                         //update details of cell
@@ -409,7 +410,7 @@ function aStar(grid, src, dest) {
                         openList.enqueue(triplet);
     
                         if (triplet.x != dest.x || triplet != dest.y) {
-                            drawAnimation(i - 1, j - 1, cellSide, "#00D9FF");
+                            drawAnimation(i - 1, j - 1, "#00D9FF");
                         }
     
                         //update details of cell
@@ -447,7 +448,7 @@ function aStar(grid, src, dest) {
                         openList.enqueue(triplet);
     
                         if (triplet.x != dest.x || triplet != dest.y) {
-                            drawAnimation(i + 1, j - 1, cellSide, "#00D9FF");
+                            drawAnimation(i + 1, j - 1, "#00D9FF");
                         }
     
                         //update details of cell
@@ -464,7 +465,10 @@ function aStar(grid, src, dest) {
 
     //when no path has been found
     if (foundDest == false) {
-        window.alert("NO PATH FOUND")
+        k++;
+        timeoutID[k] = setTimeout(function() {
+            document.getElementById("informational_text").innerHTML = "NO PATH HAS BEEN FOUND.";
+        }, time);
     }
     return;
 
