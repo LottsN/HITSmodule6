@@ -12,6 +12,12 @@
     Enter size of n=<input type="number" id="numb" min="1" max="100" /> in order to generate a maze of size n.
     <input type="button" value="Submit / Reset" onclick="createMapArray()" />
 </div>
+<div id="status_text_bar" class="panel">
+    <header>
+        <h3 id="informational_text">Set size of maze and click submit to start.</h3>
+        <h3 id="status"></h3>
+    </header>
+</div>
 <div id="command_panel" class="panel right_panel">
     <header>
         <h2 id="astar_header">A* maze solver</h2>
@@ -45,13 +51,14 @@
     <button onclick="addEnd()">Add End Point</button>
 </div>
 <div id="control_panel" class="panel right_panel">
-    <button onclick="start()">START SEARCH</button>
+    <button id="startSearch" onclick="start()" disabled="disabled">START SEARCH</button>
     <button id="clearPath" onclick="clearPath()" disabled="disabled">Clear Path</button>
     <button onclick="clearWalls()">Clear All Walls</button>
 </div>
 <script src="js.js"></script>
 <script src="a star.js"></script>
 <script src="path.js"></script>
+<script src="view.js"></script>
 <script src="MazeGeneratorPrim.js"></script>
 </br>
 <canvas></canvas>

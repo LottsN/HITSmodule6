@@ -11,14 +11,18 @@ function tracePath(cellDetails, dest) {
         y = temp_y;
     }
 
-    drawPath(x, y);
-
     const button = document.getElementById("clearPath");
     button.disabled = false;
+    l++;
+    timeoutPathID[l] = setTimeout(function () {
+        document.getElementById("informational_text").innerHTML = "Path has been found.";
+    }, time);
 }
 
 function drawPath(x, y, temp_x, temp_y) {
-    setTimeout(function () {
+
+    l++;
+    timeoutPathID[l] = setTimeout(function () {
 
         ctx.strokeStyle = "yellow";
         ctx.lineWidth = 5;
