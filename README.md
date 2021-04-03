@@ -2,13 +2,13 @@
 HITS Web tasks
 
 #status
-	Main:  30% done  //redesigning required to be cleaner
-  Task 1:  99% done  //proportionality for lower res to be added
-  Task 2:   
-  Task 2:
-  Task 4:
-  Task 5:
-  Task 6:  70% done  //works for 28x28 pixel   TODO: create weights and bias for 50x50 array
+-     Main:  30% done  //redesigning required to be cleaner
+-     Task 1:  99% done  //proportionality for lower res to be added
+-     Task 2:   
+-     Task 3:
+-     Task 4:
+-     Task 5:
+-     Task 6:  70% done  //works for 28x28 pixel   TODO: create weights and bias for 50x50 array
 
 #ideas
-  add russian/english optional localisation
+-     add russian/english optional localisation
