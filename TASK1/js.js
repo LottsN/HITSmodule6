@@ -103,6 +103,19 @@ function startPos(e) {
                     attribute = "add";
                     ar[i][j] = 1;
                     drawRec(i, j, "#808080");
+
+                    if (i == startx && j == starty) {
+                        hasStart = false;
+                        startx = -1;
+                        starty = -1;
+                    }
+
+                    else if (i == endx && j == endy) {
+                        hasEnd = false;
+                        endx = -1;
+                        endy = -1;
+                    }
+
                     return;
                 }
 
@@ -137,6 +150,18 @@ function clickObstacle(e) {
                 if (attribute == "add" && ar[i][j] == 0) {
                     ar[i][j] = 1;
                     drawRec(i, j, "#808080");
+
+                    if (i == startx && j == starty) {
+                        hasStart = false;
+                        startx = -1;
+                        starty = -1;
+                    }
+
+                    else if (i == endx && j == endy) {
+                        hasEnd = false;
+                        endx = -1;
+                        endy = -1;
+                    }
                 }
 
                 //resetting current obstacle
@@ -183,6 +208,7 @@ function clickStart(e) {
 
                 else if (hasStart && (startx != i || starty != j)) {
                     //removing old start pos
+                    clearPath();
                     drawRec(startx, starty, "white");
 
                     //adding new start pos
@@ -198,6 +224,7 @@ function clickStart(e) {
                     drawRec(i, j, "white");
                     startx = -1;
                     starty = -1;
+                    clearPath();
                 }
                 break;
             }
@@ -257,8 +284,9 @@ function clickEnd(e) {
 
                 else if (hasEnd && (endx != i || endy != j)) {
                     //removing old end pos
+                    clearPath();
                     drawRec(endx, endy, "white");
-                    ar[endx][endy] = 0;
+
 
                     //adding new end pos
                     ar[i][j] = 0;
@@ -274,6 +302,7 @@ function clickEnd(e) {
                     drawRec(i, j, "white");
                     endx = -1;
                     endy = -1;
+                    clearPath();
                 }
                 break;
             }
