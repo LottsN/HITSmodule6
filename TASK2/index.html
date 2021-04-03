@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Task 2. Clusterization</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id='canvas' width="6130" height="2900"; ></canvas>
+
+    <div class="controls">
+
+        <dl class="controls-group">
+            <dt><h4>Points</h4></dt>
+            <dd><button id="AddPointByClick" data-toggle="STOP">ADD BY HAND</button></dd>
+            <dd><button id="RandomlyAddPoints">PLACE RANDOMLY</button> <input id="AmoutOfRandomPoints" value="100">points</dd>
+            <dd><button id="DeleteAllPoints">DELETE ALL</button></dd>
+        </dl>
+
+
+        <dl class="controls-group">
+            <dt><h4>Centroids</h4></dt>
+            <dd><button id="AddCentroidByClick" data-toggle="STOP">ADD BY HAND</button></dd>
+            <dd><button id="RandomlyAddCentroids">PLACE RANDOMLY</button> <input id="AmoutOfRandomCentroids" value="3">ctrs.</dd>
+            <dd><button id="DeleteAllCentroids">DELETE ALL</button></dd>
+        </dl>
+
+
+        <dl class="controls-group">
+            <dt><h4>Controls</h4></dt>
+            <dd><button id="UpdatePoints">Update Points</button></dd>
+            <dd><button id="UpdateCentroids">Update Centoids</button></dd>
+            <dd> Frequency <input id="DelayOfCycle" value="100">ms</dd>
+            <dd><label>Distance:<select id="WhosDistance"></select></label></dd>
+        </dl>
+    </div>
+    <button id="Start" class="btn" data-toggle="STOP">START</button>
+    <script src="js.js"></script>
+</body>
+</html>

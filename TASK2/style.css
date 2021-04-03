@@ -1,0 +1,169 @@
+* {
+    font-family: 'Lato';
+}
+
+
+canvas { 
+    top: 0vh;
+    left: 0vw;
+    background-color:rgb(0 0 0 / 70%);
+    cursor: crosshair;
+    border: 0.05vh solid black;
+}
+
+.btn {
+    background-color: red;
+    bottom: 1vh;
+    height: 15.1vh;
+    width: 4.5vw;
+    border: none;
+    font-family: 'Lato';
+    font-size: 1vw;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 1vw;
+    text-transform: uppercase;
+    letter-spacing: 0.03vw;
+    font-weight: 700;
+    outline: none;
+    position: fixed;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+
+
+#Start{
+    position: fixed;
+    background-color: rgb(165, 11, 11);
+    color: rgb(87, 6, 6);
+    bottom: 1.4vh;
+    left: 46.1vw;
+    z-index: 200;
+}
+  
+  #Start:hover {
+    background: #c0392b;
+  }
+  
+  #Start:active {
+    background: #c0392b;
+    bottom: 2vh;
+  }
+  
+  #Start:before {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    line-height: 3;
+    font-size: 140%;
+    width: 60px;
+  }
+
+h4{
+    color: white;
+    text-align: center;
+    background-color: rgb(161, 10, 10);
+    margin: 0;
+    margin-bottom: 1vh;
+}
+
+.controls {
+    border-radius: 1vw;
+    border: 0.5vh solid #333;
+    position: fixed;
+    bottom: 0.5vh;
+    display: flex;
+    width: 52vw;
+    z-index: 100;
+    background-color: white;
+}
+
+
+.controls input {
+    width: 2.7vw;
+    height: 3vh;
+    font-size: 1vw;
+    border: 0.05vh none #666;
+    text-align: center;
+}
+
+.controls button {
+
+    text-align: center;
+    font-size: 0.8vw;
+    width: 10vw;
+    height: 3vh;
+    cursor: hand;
+    -webkit-writing-mode: horizontal-tb !important;
+    -webkit-appearance: button;
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    border-style: solid;
+    border-width: 0.05vh;
+
+    appearance: none;
+    border: 0;
+    background: #1d49aa;
+    color: #fff;
+}
+
+.controls button:hover {
+    background: #4676D7;
+  }
+  
+.controls button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.1vw #000207;
+  }
+
+/*width="1505" height="880"*/
+
+/*.controls button {
+    text-align: center;
+    font-size: 0.9vw;
+    width: 10vw;
+    height: 3vh;
+    border: 0.05vh #333 outset;
+    cursor: hand;
+}*/
+
+.controls-group {
+    border-right: 1vh solid #333;
+    height: 20vh;
+    width: 15vw;
+    position: relative;
+    margin: 0;
+    padding: 1vh 1vw 1vh;
+}
+
+.controls-group:last-child {
+    border-right-style: none;
+}
+
+.controls-group dt {
+    
+    display: block;
+    font-size: 1vw;
+}
+
+.controls-group dd {
+    
+    width: 20vw;
+    display: inline-block;
+    font-size: 0.9vw;
+    margin: 0 0 1vh;
+    border: 1vw;
+}
+
+select{
+    margin-left: 1vw;
+    width: 5.3vw;
+    height: 3vh;
+    font-size: 0.9vw;
+    border: 0.05vh none #666;
+    text-align: center;
+}
+
