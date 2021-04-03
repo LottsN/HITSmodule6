@@ -2,7 +2,7 @@
 HITS Web tasks
 
 #status
-  Main:  30% done  //redesigning required to be cleaner
+	Main:  30% done  //redesigning required to be cleaner
   Task 1:  99% done  //proportionality for lower res to be added
   Task 2:   
   Task 2:
