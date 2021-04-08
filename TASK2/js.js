@@ -1,6 +1,6 @@
 let canvas = document.getElementsByTagName('canvas')[0];
 let ctx = canvas.getContext('2d');
-
+let showPanel = true;
 let Points = []; //координаты точек
 let Centroids = []; //координаты центроидов
 let PointIndexToCentroidIndex = {}; //индекс каждой точки : индекс ее центроида
@@ -39,6 +39,7 @@ let AmoutOfRandomPoints = document.getElementById('AmoutOfRandomPoints');
 let AmoutOfRandomCentroids = document.getElementById('AmoutOfRandomCentroids');
 let DelayOfCycle = document.getElementById('DelayOfCycle');
 let SelectDistance = document.getElementById('WhosDistance');
+let ButtonShowingOff = document.getElementById('showingOff');
 
 
 //Обработка нажатий на кнопки
@@ -64,10 +65,28 @@ AmoutOfRandomPoints.addEventListener('keyup', (event) => () => ButtonRandomlyAdd
 AmoutOfRandomCentroids.addEventListener('keyup', (event) => () => ButtonRandomlyAddCentroids.click());
 DelayOfCycle.addEventListener('keyup', (event) =>  RestartCycle);
 
+//скрыть-показать таблицу
+ButtonShowingOff.addEventListener('click', SwitchPanel, false);
+
 RenameDistanceHTML(); //отображение выбранного расстояния
 ChangeDistance(); //изменяем функция подсчета на выбранную
 SelectDistance.addEventListener('change', ChangeDistance, false); //получаем метод расчёта
 
+//функция показа-скрытия таблицы
+function SwitchPanel(){
+    if (showPanel == true) showPanel = false;
+    else showPanel = true;
+
+    if (showPanel == true){
+        document.getElementById('cont').style.display = "flex";
+        ButtonStart.style.display = "inline-block";
+    }
+    else{
+        document.getElementById('cont').style.display = "none";
+        ButtonStart.style.display = "none";
+    }
+    SwitchButtonText(ButtonShowingOff);
+}
 
 //Функция для добавления точек \ центроидов(если их лимит не превышен)
 function Add(point) {
