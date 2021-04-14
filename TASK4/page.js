@@ -24,33 +24,47 @@ function Submit(event){
 
     //если что-то неправильно введено - добавляем ошибку в массив - потом выводим массив ошибок
 
-    if (graph.getNodeIds().length < document.getElementById('StartingVertex').value || document.getElementById('StartingVertex').value <= 0){
-        alert("Starting vertex must be less or equal number of vertix");
+    if (document.getElementById('alpha').value < 0){
         error = true;
-        errors.push("starting vertex");
+        errors.push("alpha");
     } else {
-        StartingVertex = document.getElementById('StartingVertex').value - 1;
+        alpha = document.getElementById('alpha').value;
     }
 
-    if (document.getElementById('PopulationSize').value <= 0){
+    if (document.getElementById('beta').value < 0){
         error = true;
-        errors.push("population size");
+        errors.push("beta");
     } else {
-        populationSize = document.getElementById('PopulationSize').value;
+        beta = document.getElementById('beta').value;
     }
 
-    if (document.getElementById('MutationRate').value < 0 || document.getElementById('MutationRate').value > 100){
+    if (document.getElementById('rho').value < 0 || document.getElementById('rho').value > 100){
         error = true;
-        errors.push("mutation rate");
+        errors.push("rho");
     } else {
-        MutationRateProcent = document.getElementById('MutationRate').value;
+        rho = document.getElementById('rho').value / 100;
     }
 
-    if (document.getElementById('NumberOfGenerations').value <= 0){
+    if (document.getElementById('Q').value < 0){
+        error = true;
+        errors.push("Q");
+    } else {
+        Q = document.getElementById('Q').value;
+    }
+
+    if (document.getElementById('amountofants').value <= 0){
+        error = true;
+        errors.push("amount of ants");
+    } else {
+        numAnts = document.getElementById('amountofants').value;
+    }
+
+
+    if (document.getElementById('numberofgenerations').value <= 0){
         error = true;
         errors.push("number of generations");
     } else {
-        NumberOfGenerations = document.getElementById('NumberOfGenerations').value;
+        maxTime = document.getElementById('numberofgenerations').value;
     }
 
     if (document.getElementById('delay').value < 0){
@@ -58,6 +72,13 @@ function Submit(event){
         errors.push("delay");
     } else {
         delay = document.getElementById('delay').value;
+    }
+
+    if (document.getElementById('initialpheromone').value <= 0){
+        error = true;
+        errors.push("initial pheromone");
+    } else {
+        c = document.getElementById('initialpheromone').value;
     }
 
     if (error){
@@ -114,14 +135,14 @@ function randomNode(event){
     event.preventDefault();
     graph.addNode(Math.round(Math.random() * canv.width), Math.round(Math.random() * canv.height), newId());
     showPoints(graph, "canvas");
-    showNumberOfVertexes('Amount', "");
+    showNumberOfVertexes('vertexes', "");
 
     if((graph.getNodeIds().length > 1) && (begin))
     {
         if(startGA != undefined)
             clearInterval(startGA);
 
-        startGA = StartGeneticAlgorithm(graph);
+        startGA = StartAntAlgorithm(graph);
     }
 }
 
@@ -134,7 +155,7 @@ function deleteNodes(event){
     SwitchBegin();
     }
     graph.deleteNodes();
-    showNumberOfVertexes('Amount', "");
+    showNumberOfVertexes('vertexes', "");
     newId = function(){ 
         id = 0; 
         return function(){return id++;}
@@ -161,9 +182,9 @@ function showingOff(event){
     }
     else{
         document.getElementById('toHide').style.display = "inline";
-        document.getElementById('command_panel').style.height = "59vh";
-        document.getElementById('astar_header').style.border = "solid 1vw rgba(0, 0, 0)";
-        document.getElementById('astar_header').style.backgroundColor = "rgba(0,0,0)";
+        document.getElementById('command_panel').style.height = "81.5vh";
+        document.getElementById('astar_header').style.border = "solid 1vw rgba(255, 255, 255)";
+        document.getElementById('astar_header').style.backgroundColor = "rgba(255,255,255)";
         document.getElementById('astar_header').style.textAlign = "center";
         document.getElementById('showingOff').style.right = "-3vw"
     }
@@ -207,7 +228,7 @@ function RunStop(event){
             if(startGA != undefined)
                 clearInterval(startGA);
 
-            startGA = StartGeneticAlgorithm(graph);
+            startGA = StartAntAlgorithm(graph);
         }
     } else { alert("Add at least two points"); }
 }
@@ -215,6 +236,7 @@ function RunStop(event){
 
 //подгружаем функции добавления кликом при загрузке
 window.onload = function(){ 
+    console.log("kekus");
     let canvas = document.getElementById("canvas");
     //не отображаем точки тк их еще нет
     showPoints(undefined, "canvas");
@@ -222,7 +244,7 @@ window.onload = function(){
     //довабление точек при клике и перезапуск цикла при добавлении точки кликом
     canvas.addEventListener("mousedown", function(event){
         graph.addNode(event.offsetX, event.offsetY, newId());
-        showNumberOfVertexes('Amount', "")
+        showNumberOfVertexes('vertexes', "")
         showPoints(graph, "canvas");
 
         if((graph.getNodeIds().length > 1) && (begin))
@@ -230,7 +252,7 @@ window.onload = function(){
             if(startGA != undefined)
                 clearInterval(startGA);
 
-            startGA = StartGeneticAlgorithm(graph);
+            startGA = StartAntAlgorithm(graph);
         }
 
     }, false);

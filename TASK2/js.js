@@ -315,7 +315,7 @@ function DrawSinglePoint([x, y], index) {
     ctx.save();
         ctx.fillStyle = colors[PointIndexToCentroidIndex[index]];
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, 2 * Math.PI);
+        ctx.arc(x, y, 6, 0, 2 * Math.PI);
         ctx.fill();
     ctx.restore();
 }
@@ -326,7 +326,7 @@ function DrawSingleCentroid([x, y], index) {
         ctx.strokeStyle = ctx.fillStyle = colors[index];
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.arc(x, y, 15, 0, 2 * Math.PI);
+        ctx.arc(x, y, 11, 0, 2 * Math.PI);
         ctx.fill();
         ctx.strokeStyle = 'white';
         ctx.stroke();

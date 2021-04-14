@@ -60,10 +60,13 @@ function selection(population, graph, limit){
     
     //добавляем те маршруты, которых еще не было
     let WithoutSecondEnteries = [];
-    for(let p in population)
-        if(WithoutSecondEnteries.indexOf(population[p]) == -1)
+
+    for(let p = 0; p < population.length; p++){
+        if(JSON.stringify(WithoutSecondEnteries).includes(JSON.stringify(population[p])) == false){
             WithoutSecondEnteries.push(population[p]);
-    
+        }
+    }
+
     return WithoutSecondEnteries.splice(0, limit);
 }
 
@@ -188,9 +191,8 @@ function StartGeneticAlgorithm(graph){
         
         //новое поколение - полуяаем из старого
         population = CreateNewPopulation(graph, population, populationSize);
-        //console.log("Best in round "+ GenerationNumber++ +": " + graph.getPathDistance(population[0]));
 
-        console.log("Best on " + GenerationNumber + " ,length: " + graph.getPathDistance(population[0]));
+        console.log("Best on " + GenerationNumber + ", length: " + graph.getPathDistance(population[0]));
         showPath(population[0], graph, "canvas");
         showText(' length: ' + graph.getPathDistance(population[0]), "canvas", 45, 130, 'white');
         
