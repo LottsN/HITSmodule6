@@ -1,0 +1,84 @@
+<head>
+  <title>Task 3. Genetic Algorithm</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<div id="command_panel">
+
+    <header>
+        <h3 id="astar_header">Parameters <button id="showingOff" onclick="showingOff(event)" data-toggle="+">-</button></h3>
+    </header>
+
+    <div id="toHide">
+
+      <br>
+      <br>
+      <br>
+  
+    <header>
+      <h3>Amount:</h3><h3 id='Amount'>0</h3>
+    </header>
+
+    <header>
+      <h3>StartingVertex:</h3> <input type="number" id="StartingVertex" value="1"/>
+    </header>
+  
+    <header>
+        <h3>Population:</h3> <input type="number" id="PopulationSize"  value="100">
+    </header>
+  
+    <header>
+      <h3>Mutation Rate(%)</h3> <input type="number" id="MutationRate" value="40">
+    </header>
+  
+    <header>
+      <h3>NumberOfGenerations:</h3> <input type="number" id="NumberOfGenerations" value="50">
+    </header>
+  
+    <header>
+      <h3>Delay (ms):</h3> <input type="number" id="delay" value="100">
+    </header>
+  
+
+    <br>
+    <button id="Submit" onclick="Submit(event)">Submit</button>
+   
+  </div>
+    
+  </div>
+
+<body>
+
+    <img src="map.png" style="display: none;" id="russian">
+
+    <canvas id="canvas" width="1520px" height="730px"></canvas>
+    
+    <button id="RunStop" class="btn start" data-toggle="STOP" data-toggle-class="btn stop" onclick="RunStop(event)">START</button>
+
+    <div class="dropdown">
+
+    <button id="Random" class="btn random" onclick="randomNode(event)">RANDOM</button>
+    <div class="dropdown-content">
+      <a id="add50" onclick="add50(event)">ADD 50</a>
+      <a id="add10" onclick="add10(event)">ADD 10</a>
+      <a id="add10" onclick="add5(event)" style="padding-bottom: 2vh;">ADD 5</a>
+    </div>
+
+  </div>
+
+    <button id="clear" class="btn clear" onclick="deleteNodes(event)">CLEAR</button>
+
+
+    <script src="graph.js"></script>
+
+    <script src="algorithm.js"></script>
+
+    <script src="drawing.js"></script>
+
+    <script src="page.js"></script>
+
+</body>
