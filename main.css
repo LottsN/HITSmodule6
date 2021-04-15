@@ -1,0 +1,75 @@
+body {
+    position: relative;
+    font-family: "Courier New",Courier,monospace;
+    background: black;
+    line-height: 1;
+    font-weight: bold;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    color: rgb(144, 166, 187);
+}
+
+a:active{
+    color: rgb(87, 86, 86);
+}
+
+#astar{
+    text-align: center;
+    position: fixed;
+    top: 1.5vh;
+    left: 2vw;
+    font-size: 1.6vw;
+}
+
+#clusterization{
+    text-align: center;
+    position: fixed;
+    top: 1.5vh;
+    left: 44.5vw;
+    font-size: 1.6vw;
+}
+
+#genetic{
+    text-align: center;
+    position: fixed;
+    top: 1.5vh;
+    right: 1.5vw;
+    font-size: 1.6vw;
+}
+
+#antcolony{
+    text-align: center;
+    position: fixed;
+    left: 2vw;
+    bottom: 1.5vh;
+    font-size: 1.6vw;
+}
+
+#treeofsolutions{
+    text-align: center;
+    position: fixed;
+    left: 42.5vw;
+    bottom: 1.5vh;
+    font-size: 1.6vw;
+}
+
+#neuralnetwork{
+    text-align: center;
+    position: fixed;
+    right: 1.5vw;
+    bottom: 1.5vh;
+    font-size: 1.6vw;
+}
+
+#image{
+    position: fixed;
+    width: 44vw;
+    height: 80vh;
+    left: 28.5vw;
+    top: 9.2vh;
+}
