@@ -7,7 +7,7 @@ body{
 canvas {
     position: fixed;
     margin-top: 110px;
-    right: 450px;
+    right: 425px;
 }
 
 header {
@@ -33,7 +33,7 @@ button {
     border: none;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 5px;
-    font-size: 90%;
+    font-size: 4vh;
     cursor: pointer;
     padding: 2px 8px;
     margin: 0 2%;
@@ -115,15 +115,15 @@ input[type="radio" i] {
 #instruction_panel {
     top: 20px;
     left: 20px;
-    width: 550px;
+    width: 500px;
 }
 
 #status_text_bar {
     position: fixed;
     text-align: center;
     top: 20px;
-    left: 610px;
-    width: 845px;
+    left: 550px;
+    width: calc(100vw - 940px); 
     box-shadow: none;
     background-color: initial;
 }

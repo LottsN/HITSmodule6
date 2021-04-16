@@ -89,7 +89,7 @@ function addObstacle() {
 function startPos(e) {
     painting = true;
 
-    var x = e.pageX - (window.innerWidth - (canvas.width + 450));
+    var x = e.pageX - (window.innerWidth - (canvas.width + 425));
     var y = e.pageY - 135;
 
     console.log("pageX is at ", e.pageX);
@@ -140,7 +140,7 @@ function clickObstacle(e) {
     if (!painting) return;
 
     //returns mouse position of user
-    var x = e.pageX - (window.innerWidth - (canvas.width + 450));
+    var x = e.pageX - (window.innerWidth - (canvas.width + 425));
     var y = e.pageY - 135;
 
     for (var i = 0; i < n; i++) {
@@ -189,7 +189,7 @@ function addStart() {
 //function that adds start position on canvas
 function clickStart(e) {
     //returns mouse position of user
-    var x = e.pageX - (window.innerWidth - (canvas.width + 450));
+    var x = e.pageX - (window.innerWidth - (canvas.width + 425));
     var y = e.pageY - 135;
 
     //searching for correspondant cell that user clicked
@@ -266,7 +266,7 @@ function addEnd() {
 //function that adds end position on canvas
 function clickEnd(e) {
     //returns mouse position of user
-    var x = e.pageX - (window.innerWidth - (canvas.width + 450));
+    var x = e.pageX - (window.innerWidth - (canvas.width + 425));
     var y = e.pageY - 135;
 
     //searching for correspondant cell that user clicked
