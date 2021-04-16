@@ -10,8 +10,8 @@ function drawRec(x, y, state) {
     ctx.stroke();
 }
 
+//animates cells changing colors
 function drawAnimation(x, y, state) {
-
 
     time += 5;
     k++;
@@ -29,6 +29,7 @@ function drawAnimation(x, y, state) {
     }, time);
 }
 
+//draws end position flag
 function drawFlag(x, y) {
 
     var white = 0;
@@ -54,6 +55,7 @@ function drawFlag(x, y) {
     }
 }
 
+//clears path created by algorithm
 function clearPath() {
 
     for (let i = 0; i <= k; i++) {
@@ -86,6 +88,7 @@ function clearPath() {
     document.getElementById("informational_text").innerHTML = "Check options and click START SEARCH to start PathFinding Algorithm.";
 }
 
+//clears all obstacles
 function clearWalls() {
 
     for (let i = 0; i < n; i++) {
