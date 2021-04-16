@@ -3,12 +3,12 @@ HITS Web tasks
 
 #status
 -     Main:  100% done
--     Task 1:  99% done  //proportionality for lower res to be added
+-     Task 1:  100% done  //woohooo
 -     Task 2:  basic version and site design are fully completed //will try to make bonus version (begin with it)
 -     Task 3:  basic version and site design are fully completed //will try to make bonus version
 -     Task 4:  basic version and site design are fully completed //will try to make bonus version
--     Task 5:
--     Task 6:  70% done  //works for 28x28 pixel   TODO: create weights and bias for 50x50 array
+-     Task 5:  70% done  //used ID3 for basic option (complete)  //bonus version non existent C4.5 (no time) 
+-     Task 6:  +-100% done  //50x50 pixel canvas converted to 28x28 neural network 
 
 #ideas
 -     add russian/english optional localisation
