@@ -1,7 +1,8 @@
 //this is the main script file
 //it contains all global variables
 //creates the grid
-//
+//sets initial positions
+//controls buttons
 
 
 var ar = new Array(100);
@@ -226,11 +227,20 @@ function clickStart(e) {
                     starty = -1;
                     clearPath();
                 }
+
+                //checking if interfered with end position
+                if(endx == i && endy == j) {
+                    hasEnd = false;
+                    endx = -1;
+                    endy = -1;
+                }
+
                 break;
             }
         }
     }
 
+    //checking status' status :)
     if (hasStart == true && hasEnd == true) {
         document.getElementById("informational_text").innerHTML = "Check options and click START SEARCH to start PathFinding Algorithm.";
         const button = document.getElementById("startSearch");
@@ -304,11 +314,20 @@ function clickEnd(e) {
                     endy = -1;
                     clearPath();
                 }
+
+                //checking if interfered with start position
+                if(startx == i && starty == j) {
+                    hasStart = false;
+                    startx = -1;
+                    starty = -1;
+                }
+
                 break;
             }
         }
     }
 
+    //checking status' status :_)
     if (hasStart == true && hasEnd == true) {
         document.getElementById("informational_text").innerHTML = "Check options and click START SEARCH to start PathFinding Algorithm.";
         const button = document.getElementById("startSearch");
@@ -330,6 +349,7 @@ function clickEnd(e) {
     }
 }
 
+//starts path searching algorithm
 function start() {
     canvas.removeEventListener("click", clickObstacle);
     canvas.removeEventListener("click", clickStart);
