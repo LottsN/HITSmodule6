@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="input_panel" class="panel">
+        <header>
+            <h2 class="header_title" id="instruction">Write training file column titles in csv text format. Make sure
+                starting column is name of row and last column is the decision to be made.</h2>
+        </header>
+        <input type="text" id="csv" />
+        <button id="controlButton" onclick="controller()">Add Header</button>
+    </div>
+    <div>
+        <table id="table">
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="generateTree" class="panel">
+        <button id="generateCompactTreeButton" onclick="generateCompactTree()">Generate Compact Tree</button>
+        <button id="generateTreeButton" onclick="generateTree()">Generate Tree</button>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="js.js"></script>
+    <script src="decisionTree.js"></script>
+    <script src="decisionTree2.js"></script>
+    <script src="drawTree.js"></script>
+    <script>
+        //adds Enter button functionality //addes in html since keyCode deprecated in .js file :/
+        var input = document.getElementById("csv");
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("controlButton").click();
+            }
+        });
+    </script>
+</body>
+
+</html>
