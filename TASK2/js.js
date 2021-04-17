@@ -103,7 +103,7 @@ function Add(point) {
     }
 }
 
-
+//функция для получения координаты клика по канвасу
 function getPointClickedOnCanvas(event) {
     let canvasRect = canvas.getBoundingClientRect();
     return [
