@@ -65,8 +65,6 @@ function Distance(cityX, cityY, matrix){
 
 //функция подсчета вероятности перехода
 function CalculateProbabilities(cityX, visited, pheromones, dists){
-  // for ant k, located at nodeX, with visited[], return the prob of moving to each city
-
   let numCities = pheromones.length;
   let taueta = new Array(numCities); //массив, содержащий tau^alpha*eta^beta для каждого города
   let sum = 0.0; //сумма всех tau^alpha*eta^beta
