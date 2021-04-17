@@ -171,7 +171,7 @@ function CreateNewPopulation(graph, oldPopulation, populationSize){
     return selection(oldPopulation, graph, populationSize);
 }
 
-
+//основная функция для старта алгоритма
 function StartGeneticAlgorithm(graph){
 
     var population = [];
