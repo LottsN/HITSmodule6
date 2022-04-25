@@ -1,5 +1,5 @@
-# HITSmodule6
-HITS Web tasks
+# Web realization of several algorithms and ML
+Web tasks
 
 #status
 -     Main:  100% done
